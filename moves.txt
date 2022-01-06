@@ -1,0 +1,8 @@
+2a 4a
+7b 5b
+4a 5b
+7c 6c
+5b 6c
+6c 7d
+print
+exit
