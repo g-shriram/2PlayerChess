@@ -39,7 +39,7 @@ on command promt.
 - This game supports two mode
   - Real time using console
   - Using file with stored moves 
-    - For input file format refer :[Sample input file](https://github.com/g-shriram/2PlayerChess/blob/e2c7556703299d83aeb1ad8145744adf8f944a52/moves.txt)
+    - For input file format refer :[Sample input file](https://github.com/g-shriram/2PlayerChess/blob/142560761ec179aac7b76e17abedc99201f87e70/2PlayerChess_LLD/src/com/zoho/LLDInterview/moves.txt)
 
 - For each game enter details like 
   - Input mode (1 - for 'console' and 2 - for 'from file')
