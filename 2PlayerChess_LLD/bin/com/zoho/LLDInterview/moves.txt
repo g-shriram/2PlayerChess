@@ -1,0 +1,15 @@
+2d 4d
+7a 5a
+1c 3e
+7b 5b
+print
+1d 2d
+7c 5c
+1b 3a
+7h 5h
+1e 1c
+print
+5c 4c
+3a 5b 
+print
+exit
