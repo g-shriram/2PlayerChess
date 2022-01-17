@@ -3,6 +3,7 @@ package com.zoho.LLDInterview;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Game {
 	
@@ -13,6 +14,7 @@ public class Game {
     private GameStatus status;
     private List<Move> movesPlayed;
     private List<Coin> killedCoins;
+    private Stack<Board> undoMove;
     private Pawn enPassantCoin;
 
     private Input input;
@@ -31,7 +33,7 @@ public class Game {
         this.status = new GameStatus();
         this.board = new Board();
        
-        board.initializeBoard();
+       
         output.initializeOutput(this);
   
         if (player1.isWhiteSide()) {
@@ -43,8 +45,19 @@ public class Game {
   
         movesPlayed = new ArrayList<Move>();
         killedCoins = new ArrayList<Coin>();
+        undoMove = new Stack<Board>();
+        undoMove.clear();
         movesPlayed.clear();
         killedCoins.clear();
+        
+        try {
+			Board temp = (Board) board.clone();
+			undoMove.push(temp);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
      
     }
     
@@ -69,6 +82,27 @@ public class Game {
     		if(nextMove.equals("print"))
     		{
     			this.board.printBoard();
+    			continue;
+    		}
+    		
+    		if(nextMove.equals("undo"))
+    		{
+    			if(undoMove.size()>1) {
+    				this.undoMove.pop();
+    		        try {
+    					Board temp = undoMove.peek(); 
+    					this.board = (Board) temp.clone();
+    					
+    				} catch (CloneNotSupportedException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    				    			
+    				this.board.printBoard();
+    			}
+    			else
+    				System.out.println("Cannot Undo...");
+    			
     			continue;
     		}
     		
@@ -243,9 +277,21 @@ public class Game {
     	move.getStart().setCoin(null);
     	output.writeMove(move);
     	System.out.println("Coin Placed !!!");
+    	
+        try {
+			Board temp = (Board) board.clone();
+			undoMove.push(temp);
+			
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+       
     	return;
     }
     
+
     public boolean isCastling(Move move) {
     	
     	int x = move.getEnd().getX();
@@ -369,6 +415,6 @@ public class Game {
   	public void setMovesPlayed(List<Move> movesPlayed) {
   		this.movesPlayed = movesPlayed;
   	}
-
+//end
  
 }

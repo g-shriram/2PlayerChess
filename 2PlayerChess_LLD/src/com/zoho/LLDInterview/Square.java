@@ -16,6 +16,11 @@ public class Square {
 
 	}
 
+	public Square clone() {
+		Square square = new Square(this.x,this.y,this.coin);
+		return square;
+	}
+	
 	public List<Square> getPossibleSquares(Board board){
 		if(this.getCoin()!=null)
 			return getCoin().getPossibleSquares(board,this.x, this.y);

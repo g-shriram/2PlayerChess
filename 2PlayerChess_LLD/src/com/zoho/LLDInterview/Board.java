@@ -1,6 +1,6 @@
 package com.zoho.LLDInterview;
 
-public class Board {
+public class Board implements Cloneable{
 	
 	Square squares[][];
 	
@@ -44,6 +44,25 @@ public class Board {
 			}
 		}
 	}
+	
+	public Object clone() throws CloneNotSupportedException
+    {
+        // Assign the shallow copy to
+        // new reference variable t
+        Board t = new Board();
+        
+        for(int i =0;i<8;i++) {
+        	for(int j=0;j<8;j++) {
+        		t.squares[i][j] = this.getSquare(i, j).clone();
+        	}
+        }
+ 
+ 
+        // Create a new object for the field c
+        // and assign it to shallow copy obtained,
+        // to make it a deep copy
+        return t;
+    }
 	
 	public Square getSquare(int x,int y) {
 		return this.squares[x][y];
